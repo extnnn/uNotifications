@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: alex
+ * Send to email external library connector
+ * Author: Olexiy Nakhod
  * Date: 2019-03-15
- * Time: 22:12
  */
 
 namespace App\Vendor;
@@ -12,9 +11,10 @@ namespace App\Vendor;
 class EmailServiceProvider
 {
 
-    public static function send ($to, $subject, $message){
+    public static function send($to, $subject, $message)
+    {
 
-    return true;
+        return true;
 
     }
 

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Notifications Controller
  * Author: Olexiy Nakhod
  * Date: 2019-03-15
@@ -11,18 +11,22 @@ use App\Helpers\Sender;
 use App\Event;
 
 
+class NotificationsController
+{
 
-class NotificationsController {
-
-
-    /*
+    /**
      * send Notification to the customer
-     * @param
-     * @return
-     *
+     * @param message as Object  with the next params
+     * $message->userId
+     * $message->eventId
+     * $message->title
+     * $message->body
+     * @return Object with
+     * name->result true or false
+     * name->message
      */
 
-    public function make ($message)
+    public function make($message)
     {
 
         $sendResult = new \StdClass();
@@ -47,18 +51,17 @@ class NotificationsController {
 
             if (!empty($userEventSendMethod)) {
 
-                foreach ($userEventSendMethod as $methodName => $methodStatus)
-                {
+                foreach ($userEventSendMethod as $methodName => $methodStatus) {
+
                     if ($methodStatus == 'yes') {
 
                         $className = "App\\Helpers\\" . $methodName;
                         $sendmessage = new SendController(new $className);
-                        if ($sendmessage->send($message)){
+                        if ($sendmessage->send($message)) {
                             $sendResult->result = true;
-                            $sendResult->message = $sendResult->message . ' Notifications for user id: ' . $message->userId . ' with method ' . $methodName . ' has been sent'.PHP_EOL;
+                            $sendResult->message = $sendResult->message . ' Notifications for user id: ' . $message->userId . ' with method ' . $methodName . ' has been sent' . PHP_EOL;
                         }
 
-                        
                     }
                 }
 
@@ -66,9 +69,8 @@ class NotificationsController {
 
             }
 
-        }   
-        
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
+
             $sendResult->general = new \stdClass();
             $sendResult->general->result = FALSE;
             $sendResult->general->message = $e->getMessage();

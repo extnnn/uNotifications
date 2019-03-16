@@ -1,15 +1,20 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: alex
+ * Sender Interface
+ * Author: Olexiy Nakhod
  * Date: 2019-03-15
- * Time: 20:19
  */
+
 
 namespace App\Helpers;
 
 
 interface Sender {
+
+    /**
+     * send message interface
+     * @param $message as Object
+     */
 
     public function send ($message);
 }

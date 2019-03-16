@@ -1,15 +1,21 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: alex
- * Date: 2019-03-16
- * Time: 00:29
+ * Send to email implementaions
+ * Author: Olexiy Nakhod
+ * Date: 2019-03-15
  */
 
 namespace App\Helpers;
 use App\Vendor\SmsServiceProvider;
 
 class SendToSms implements Sender {
+
+
+    /**
+     * send message thru SMS
+     * @param $message as Object
+     * @return true or false
+     */
 
     public function send ($message){
  

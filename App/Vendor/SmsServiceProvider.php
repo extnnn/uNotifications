@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: alex
+ * Send to SMS external library connector
+ * Author: Olexiy Nakhod
  * Date: 2019-03-15
- * Time: 22:10
  */
 
 namespace App\Vendor;

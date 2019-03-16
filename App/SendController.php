@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: alex
+ * Sender Controller
+ * Author: Olexiy Nakhod
  * Date: 2019-03-15
- * Time: 23:41
  */
 
 namespace App;
@@ -17,7 +16,6 @@ class SendController
 
     protected $sender;
 
-
     public function __construct(Sender $sender)
     {
         $this->sender = $sender;
@@ -25,7 +23,13 @@ class SendController
     }
 
 
-    public function send ($message)
+    /**
+     * send message thru SMS
+     * @param $message as Object
+     * @return true or false
+     */
+
+    public function send($message)
     {
 
         return $this->sender->send($message);
