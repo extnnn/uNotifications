@@ -1,2 +1,2 @@
 # uNotifications
-Notifications based on Users Events settings 
+Notifications based on the Users Events settings 
