@@ -10,7 +10,7 @@ namespace App;
 
 class Event
 {
-    private  $events =  [
+    static $EVENTS =  [
             '1' => [
 
                 '1' => [
@@ -42,12 +42,12 @@ class Event
     public static function getStatus ($userId, $eventId)
     {
 
-        if ($eventId >= 1) {
+        if ($eventId > 0) {
 
-            return self::events[$userId][$eventId];
+            return self::$EVENTS[$userId][$eventId];
         }
         else {
-            return false;
+            return null;
         }
 
     }

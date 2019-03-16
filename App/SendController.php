@@ -8,8 +8,9 @@
 
 namespace App;
 
-use unity\App\Helpers\Sender;
-
+use App\Helpers\Sender;
+use App\Helpers\SendToEmail;
+use App\Helpers\SendToSms;
 
 class SendController
 {

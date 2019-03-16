@@ -9,12 +9,10 @@
 namespace App\Helpers;
 use App\Vendor\EmailServiceProvider;
 
-class SendToEmail implements  Sender {
+class SendToEmail implements Sender {
 
     public function send ($message){
-
         
-        echo "email\n";
         return EmailServiceProvider::send($message->address, $message->subject, $message->text);
 
     }

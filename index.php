@@ -19,7 +19,8 @@ We are happy to confirm that your order has been received and your payment has s
 Your order number is  $orderId
 MSG;
 
+// var_dump($message);
 
-$notifications->make($message);
+$result = $notifications->make($message);
 
-var_dump($notifications);
+var_dump($result);

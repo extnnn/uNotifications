@@ -8,6 +8,8 @@
 namespace App;
 
 use App\Helpers\Sender;
+use App\Event;
+
 
 
 class NotificationsController {
@@ -29,6 +31,7 @@ class NotificationsController {
 
         $user = User::find($message->userId);
 
+
         if (!$user) {
 
             $sendResult->result = FALSE;
@@ -39,20 +42,23 @@ class NotificationsController {
 
         try {
 
-            $userEvent = Event::getStatus($message->userId, $message->event_id);
 
-            if (!empty($userEvent)) {
+            $userEventSendMethod = Event::getStatus($message->userId, $message->eventId);
 
-                foreach ($userEvent as $eventName => $eventStatus)
+            if (!empty($userEventSendMethod)) {
+
+                foreach ($userEventSendMethod as $methodName => $methodStatus)
                 {
-                    if ($eventStatus == 'yes') {
+                    if ($methodStatus == 'yes') {
 
-                        echo $eventName.'-'.$eventStatus;
+                        $className = "App\\Helpers\\" . $methodName;
+                        $sendmessage = new SendController(new $className);
+                        if ($sendmessage->send($message)){
+                            $sendResult->result = true;
+                            $sendResult->message = $sendResult->message . ' Notifications for user id: ' . $message->userId . ' with method ' . $methodName . ' has been sent'.PHP_EOL;
+                        }
 
-                        $sendmessage = new SendController(new $eventName);
-                        $sendmessage->send($message);
-
-                        $sendResult->message = $sendResult->message . ' Notifications for user id: ' . $message->userId . 'has been sent';
+                        
                     }
                 }
 
@@ -60,7 +66,9 @@ class NotificationsController {
 
             }
 
-        } catch (\Exception $e) {
+        }   
+        
+        catch (\Exception $e) {
             $sendResult->general = new \stdClass();
             $sendResult->general->result = FALSE;
             $sendResult->general->message = $e->getMessage();
@@ -68,10 +76,6 @@ class NotificationsController {
             return $sendResult;
         }
 
-
-        return $sendResult;
     }
-
-
 
 }

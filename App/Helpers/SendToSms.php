@@ -9,11 +9,10 @@
 namespace App\Helpers;
 use App\Vendor\SmsServiceProvider;
 
-class SendToSms implements  Sender {
+class SendToSms implements Sender {
 
     public function send ($message){
-
-        echo "mail\n";
+ 
         return SmsServiceProvider::send($message->address, $message->subject.$message->text);
 
     }
